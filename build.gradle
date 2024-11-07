@@ -35,6 +35,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'io.sentry:sentry-spring-boot-starter:6.18.1'
+	implementation 'io.sentry:sentry-logback:6.18.1'
 }
 
 tasks.named('test') {
