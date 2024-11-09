@@ -1,6 +1,7 @@
 package com.example.eventmoa.domain.user.service;
 
 import com.example.eventmoa.domain.user.exception.PasswordMissMatch;
+import com.example.eventmoa.domain.user.exception.UserNotFoundException;
 import com.example.eventmoa.domain.user.persistence.User;
 import com.example.eventmoa.domain.user.persistence.repository.UserRepository;
 import com.example.eventmoa.domain.user.presentation.dto.request.UserLoginRequest;
@@ -16,7 +17,7 @@ public class UserLoginService {
     private final JwtProvider jwtProvider;
 
     public TokenResponse login(UserLoginRequest request) {
-        User user = userRepository.findByUsername(request.getUsername());
+        User user = userRepository.findByUsername(request.getUsername()).orElseThrow(UserNotFoundException::new);
         if(!request.getPassword().equals(user.getPassword())) {
             throw PasswordMissMatch.EXCEPTION;
         }
