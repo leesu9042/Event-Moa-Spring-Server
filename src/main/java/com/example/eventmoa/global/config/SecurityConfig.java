@@ -1,6 +1,9 @@
 package com.example.eventmoa.global.config;
 
 
+import com.example.eventmoa.global.error.GlobalExceptionFilter;
+import com.example.eventmoa.global.filter.JwtTokenFilter;
+import com.example.eventmoa.global.security.jwt.JwtProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final ObjectMapper objectMapper;
+    private final JwtProvider jwtProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,8 +42,17 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth ->
                         auth
-                                .anyRequest().permitAll()
-                );
+                                .requestMatchers("/auth/login", "/auth/reissue").permitAll()
+                                .requestMatchers("/swagger-ui/index.html",
+                                        // Swagger 허용 URL
+                                        "/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources",
+                                        "/swagger-resources/**", "/configuration/ui", "/configuration/security", "/swagger-ui/**",
+                                        "/webjars/**", "/swagger-ui.html").permitAll()
+                                .requestMatchers("/department/create","/department/queryAll","/test/hello").authenticated()
+                                .anyRequest().authenticated()
+                )
+                .addFilterBefore(new JwtTokenFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new GlobalExceptionFilter(), JwtTokenFilter.class);
         return http.build();
     }
 }

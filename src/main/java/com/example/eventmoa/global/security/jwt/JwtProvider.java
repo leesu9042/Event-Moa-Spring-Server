@@ -33,8 +33,8 @@ public class JwtProvider {
     private static final String REFRESH_KEY = "refresh_token";
 
     public TokenResponse generateToken(String id, String role) {
-        String accessToken = generateToken(id, role, ACCESS_KEY, jwtProperties.getAccessExp());
-        String refreshToken = generateToken(id, role, REFRESH_KEY, jwtProperties.getRefreshExp());
+        String accessToken = generateToken(id, "ROLE_"+role, ACCESS_KEY, jwtProperties.getAccessExp());
+        String refreshToken = generateToken(id, "ROLE_"+role, REFRESH_KEY, jwtProperties.getRefreshExp());
 
         refreshTokenRepository.save(
                 RefreshToken.builder()
@@ -81,6 +81,18 @@ public class JwtProvider {
     public String getRole(String token) {
         return getJws(token).getBody().get("role").toString();
     }
+
+    public boolean validToken(String token) {
+        try {
+            Jwts.parser()
+                    .setSigningKey(jwtProperties.getJwtSecret())
+                    .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     private Jws<Claims> getJws(String token) {
         try {
