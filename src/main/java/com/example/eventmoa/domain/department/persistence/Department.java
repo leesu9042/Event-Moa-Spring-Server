@@ -3,16 +3,14 @@ package com.example.eventmoa.domain.department.persistence;
 //import com.example.eventmoa.domain.department.Departments;
 import com.example.eventmoa.domain.user.persistence.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Getter
 @Builder
 @Table(name = "tbl_department")
 public class Department {
@@ -25,6 +23,9 @@ public class Department {
 
     @Column(nullable = false)
     private String date;
+
+    @Column(nullable = false)
+    private String time;
 
     @Column(nullable = false)
     private String place;
