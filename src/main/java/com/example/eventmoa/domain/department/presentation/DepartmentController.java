@@ -35,6 +35,7 @@ public class DepartmentController {
         departmentCreateService.create(request);
     }
 
+    @Operation(summary = "과행사 전체 조회")
     @GetMapping("/queryAll")
     public List<DepartmentQueryAllResponse> queryAll() {
         return departmentQueryAllService.queryAll();

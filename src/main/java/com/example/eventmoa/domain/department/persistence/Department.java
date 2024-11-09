@@ -1,6 +1,8 @@
 package com.example.eventmoa.domain.department.persistence;
 
+//import com.example.eventmoa.domain.department.Departments;
 import com.example.eventmoa.domain.department.Departments;
+import com.example.eventmoa.domain.user.persistence.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,6 +36,9 @@ public class Department {
 
     @Column(nullable = false)
     private Departments department;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @Column(nullable = false)
     private String note;
