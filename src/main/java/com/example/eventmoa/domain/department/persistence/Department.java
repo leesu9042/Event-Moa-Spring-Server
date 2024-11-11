@@ -2,6 +2,7 @@ package com.example.eventmoa.domain.department.persistence;
 
 //import com.example.eventmoa.domain.department.Departments;
 import com.example.eventmoa.domain.department.Departments;
+import com.example.eventmoa.domain.department.presentation.dto.request.DepartmentCreateRequest;
 import com.example.eventmoa.domain.user.persistence.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,4 +43,17 @@ public class Department {
 
     @Column(nullable = false)
     private String note;
+
+    public void update(Long id, DepartmentCreateRequest request) {
+        this.id = id;
+        this.eventName = request.getEventName();
+        this.date = request.getDate();
+        this.time = request.getTime();
+        this.place = request.getPlace();
+        this.personnel = request.getPersonnel();
+        this.department = request.getDepartment();
+        this.note = request.getNote();
+    }
+
+
 }
