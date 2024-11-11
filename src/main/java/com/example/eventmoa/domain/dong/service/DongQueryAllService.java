@@ -16,7 +16,7 @@ public class DongQueryAllService {
 
     @Transactional(readOnly = true)
     public List<DongQueryAllResponse> queryAll() {
-        return dongRepository.findAllByOrderByDateAscTimeAsc()
+        return dongRepository.findAllByOrderByDateAscTimeAscDongAsc()
                 .stream()
                 .map(DongQueryAllResponse::new)
                 .toList();

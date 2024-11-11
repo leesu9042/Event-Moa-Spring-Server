@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface DongRepository extends CrudRepository<Dong, Long> {
-    List<Dong> findAllByOrderByDateAscTimeAsc();
+    List<Dong> findAllByOrderByDateAscTimeAscDongAsc();
 }
