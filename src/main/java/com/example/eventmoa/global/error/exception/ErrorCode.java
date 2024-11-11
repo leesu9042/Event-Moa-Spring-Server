@@ -11,15 +11,16 @@ public enum ErrorCode {
     USER_NOT_FOUND(404,"존재하지 않는 유저입니다. "),
     PASSWORD_MISMATCH(401,"Password MisMatch"),
     ACCOUNTED_ALREADY_EXISTS(409, "AccountId Already Exists"),
-    ADMIN_NOT_FOUND(404,"존재하지 않는 관리자입니다."),
-    ADMIN_MISMATCH(401,""),
+    UNAUTHORIZED_USER(403,"권한이 부족한 유저입니다."),
 
-    POST_NOT_FOUND(404,"존재하지 않는 게시물입니다."),
+    DEPARTMENT_NOT_FOUND(404,"존재하지 않는 과행사입니다."),
+    DONG_NOT_FOUND(404,"존재하지 않는 동행사입니다."),
 
     INVALID_TOKEN(401,"Invalid Token."),
     EXPIRED_TOKEN(401, "Expired Token"),
     INTERNAL_SERVER_ERROR(500,"Internal Server Error");
 
-    private Integer status;
-    private String message;
+
+    private final Integer status;
+    private final String message;
 }
