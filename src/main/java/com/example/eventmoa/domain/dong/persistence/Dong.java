@@ -2,6 +2,7 @@ package com.example.eventmoa.domain.dong.persistence;
 
 import com.example.eventmoa.domain.department.Departments;
 import com.example.eventmoa.domain.dong.Dongs;
+import com.example.eventmoa.domain.dong.presentation.dto.request.DongCreateRequest;
 import com.example.eventmoa.domain.user.persistence.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tbl_dong")
 public class Dong {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,5 +45,16 @@ public class Dong {
 
     @Column(nullable = false)
     private String phone;
+
+    public void update(Long id, DongCreateRequest request) {
+        this.id = id;
+        this.eventName = request.getEventName();
+        this.date = request.getDate();
+        this.time = request.getTime();
+        this.place = request.getPlace();
+        this.personnel = request.getPersonnel();
+        this.dong = request.getDong();
+        this.phone = request.getPhone();
+    }
 
 }
