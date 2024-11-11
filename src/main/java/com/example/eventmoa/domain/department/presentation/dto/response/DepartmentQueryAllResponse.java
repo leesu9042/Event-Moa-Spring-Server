@@ -32,6 +32,9 @@ public class DepartmentQueryAllResponse {
     @Schema(description = "비고")
     private String note;
 
+    @Schema(description = "userId")
+    private Long userId;
+
     public DepartmentQueryAllResponse(Department department) {
         this.id = department.getId();
         this.eventName = department.getEventName();
@@ -41,5 +44,6 @@ public class DepartmentQueryAllResponse {
         this.personnel = department.getPersonnel();
         this.department = department.getDepartment().ordinal();
         this.note = department.getNote();
+        this.userId = department.getUser().getId();
     }
 }
