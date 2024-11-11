@@ -48,8 +48,10 @@ public class SecurityConfig {
                                         "/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources",
                                         "/swagger-resources/**", "/configuration/ui", "/configuration/security", "/swagger-ui/**",
                                         "/webjars/**", "/swagger-ui.html").permitAll()
-                                .requestMatchers("/department/create","/department/queryAll","/test/hello").authenticated()
-                                .anyRequest().authenticated()
+                                .requestMatchers("/department/**","/test/hello").authenticated()
+                                .requestMatchers("/auth/**").authenticated()
+                                .requestMatchers("/dong/**").authenticated()
+                                .anyRequest().permitAll()
                 )
                 .addFilterBefore(new JwtTokenFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new GlobalExceptionFilter(), JwtTokenFilter.class);
