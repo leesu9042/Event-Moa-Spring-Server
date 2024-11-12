@@ -1,8 +1,10 @@
 package com.example.eventmoa.domain.dong;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum Dongs {
     JINJAM_DONG("진잠동"),
     HAKHA_DONG("학하동"),
