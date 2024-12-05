@@ -20,11 +20,23 @@ public class DongCreateService {
                         .phone(request.getPhone())
                         .place(request.getPlace())
                         .time(request.getTime())
-                        .date(request.getDate())
+                        .date(plusZero(request.getDate()))
                         .eventName(request.getEventName())
                         .personnel(request.getPersonnel())
                         .dong(request.getDong())
                         .build()
         );
+    }
+
+    private String plusZero(String date){
+        String[] day = date.split("\\.");
+        String[] time = day[2].split(" ");
+        if(day[1].length() == 1){
+            day[1] = "0" + day[1];
+        }
+        if(time[0].length() == 1){
+            time[0] = "0" + time[0];
+        }
+        return day[0] + "." + day[1] + "." + time[0]+" "+time[1];
     }
 }

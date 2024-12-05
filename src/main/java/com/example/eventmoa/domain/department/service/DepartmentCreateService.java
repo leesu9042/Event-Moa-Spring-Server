@@ -15,8 +15,9 @@ public class DepartmentCreateService {
     private final UserFacade userFacade;
     @Transactional
     public void create(DepartmentCreateRequest request) {
+
         departmentRepository.save(Department.builder()
-                        .date(request.getDate())
+                        .date(plusZero(request.getDate()))
                         .department(request.getDepartment())
                         .note(request.getNote())
                         .place(request.getPlace())
@@ -25,5 +26,17 @@ public class DepartmentCreateService {
                         .time(request.getTime())
                         .user(userFacade.getCurrentUser())
                 .build());
+    }
+
+    private String plusZero(String date){
+        String[] day = date.split("\\.");
+        String[] time = day[2].split(" ");
+        if(day[1].length() == 1){
+            day[1] = "0" + day[1];
+        }
+        if(time[0].length() == 1){
+            time[0] = "0" + time[0];
+        }
+        return day[0] + "." + day[1] + "." + time[0]+" "+time[1];
     }
 }

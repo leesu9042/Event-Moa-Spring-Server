@@ -49,12 +49,24 @@ public class Dong {
     public void update(Long id, DongCreateRequest request) {
         this.id = id;
         this.eventName = request.getEventName();
-        this.date = request.getDate();
+        this.date = plusZero(request.getDate());
         this.time = request.getTime();
         this.place = request.getPlace();
         this.personnel = request.getPersonnel();
         this.dong = request.getDong();
         this.phone = request.getPhone();
+    }
+
+    private String plusZero(String date){
+        String[] day = date.split("\\.");
+        String[] time = day[2].split(" ");
+        if(day[1].length() == 1){
+            day[1] = "0" + day[1];
+        }
+        if(time[0].length() == 1){
+            time[0] = "0" + time[0];
+        }
+        return day[0] + "." + day[1] + "." + time[0]+" "+time[1];
     }
 
 }
