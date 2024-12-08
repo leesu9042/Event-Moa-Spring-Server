@@ -2,6 +2,7 @@ package com.example.eventmoa.domain.dong.service;
 
 import com.example.eventmoa.domain.department.presentation.dto.response.DepartmentQueryAllResponse;
 import com.example.eventmoa.domain.dong.persistence.repository.DongRepository;
+import com.example.eventmoa.domain.dong.presentation.dto.response.DongQueryAllList;
 import com.example.eventmoa.domain.dong.presentation.dto.response.DongQueryAllResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,10 @@ public class DongQueryAllService {
     private final DongRepository dongRepository;
 
     @Transactional(readOnly = true)
-    public List<DongQueryAllResponse> queryAll() {
-        return dongRepository.findAllByOrderByDateAscTimeAscDongAsc()
+    public DongQueryAllResponse queryAll() {
+         return new DongQueryAllResponse(dongRepository.findAllByOrderByDateAscTimeAscDongAsc()
                 .stream()
-                .map(DongQueryAllResponse::new)
-                .toList();
+                .map(DongQueryAllList::new)
+                .toList());
     }
 }
