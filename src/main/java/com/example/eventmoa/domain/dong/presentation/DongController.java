@@ -1,18 +1,15 @@
 package com.example.eventmoa.domain.dong.presentation;
 
+import com.example.eventmoa.domain.department.presentation.dto.request.DepartmentQueryhanRequest;
 import com.example.eventmoa.domain.dong.presentation.dto.request.DongCreateRequest;
 import com.example.eventmoa.domain.dong.presentation.dto.response.DongQueryAllResponse;
-import com.example.eventmoa.domain.dong.service.DongCreateService;
-import com.example.eventmoa.domain.dong.service.DongDeleteService;
-import com.example.eventmoa.domain.dong.service.DongQueryAllService;
-import com.example.eventmoa.domain.dong.service.DongUpdateService;
+import com.example.eventmoa.domain.dong.presentation.dto.response.DongQueryhanResponse;
+import com.example.eventmoa.domain.dong.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,9 +20,11 @@ public class DongController {
     private final DongQueryAllService dongQueryAllService;
     private final DongUpdateService dongUpdateService;
     private final DongDeleteService dongDeleteService;
+    private final DongCheckUserService dongCheckUserService;
+    private final DongHanService dongHanService;
 
     @GetMapping("/queryAll")
-    public List<DongQueryAllResponse> queryAll() {
+    public DongQueryAllResponse queryAll() {
         return dongQueryAllService.queryAll();
     }
 
@@ -43,5 +42,15 @@ public class DongController {
     @PutMapping("/update/{id}")
     public void update(@PathVariable Long id,@Valid @RequestBody DongCreateRequest request){
         dongUpdateService.update(id, request);
+    }
+
+    @GetMapping("/check/{id}")
+    public boolean check(@PathVariable Long id) {
+        return dongCheckUserService.check(id);
+    }
+
+    @PostMapping("/query")
+    public DongQueryhanResponse query(@RequestBody DepartmentQueryhanRequest request) {
+        return dongHanService.queryAll(request);
     }
 }

@@ -2,11 +2,11 @@ package com.example.eventmoa.domain.department.presentation;
 
 import com.example.eventmoa.domain.department.persistence.Department;
 import com.example.eventmoa.domain.department.presentation.dto.request.DepartmentCreateRequest;
+import com.example.eventmoa.domain.department.presentation.dto.request.DepartmentQueryhanRequest;
 import com.example.eventmoa.domain.department.presentation.dto.response.DepartmentQueryAllResponse;
-import com.example.eventmoa.domain.department.service.DepartmentCreateService;
-import com.example.eventmoa.domain.department.service.DepartmentDeleteService;
-import com.example.eventmoa.domain.department.service.DepartmentQueryAllService;
-import com.example.eventmoa.domain.department.service.DepartmentUpdateService;
+import com.example.eventmoa.domain.department.presentation.dto.response.DepartmentQueryhanResponse;
+import com.example.eventmoa.domain.department.service.*;
+//import com.example.eventmoa.domain.department.service.DepartmentQueryAllService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -14,8 +14,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/department")
@@ -26,6 +24,8 @@ public class DepartmentController {
     private final DepartmentQueryAllService departmentQueryAllService;
     private final DepartmentUpdateService departmentUpdateService;
     private final DepartmentDeleteService departmentDeleteService;
+    private final DepartmentHanService departmentHanService;
+    private final DepartmentCheckUserService departmentCheckUserService;
 
     @Operation(summary = "과행사 생성 요청", description = "과행사가 삭제됩니다.")
     @ApiResponses({
@@ -41,7 +41,7 @@ public class DepartmentController {
 
     @Operation(summary = "과행사 전체 조회")
     @GetMapping("/queryAll")
-    public List<DepartmentQueryAllResponse> queryAll() {
+    public DepartmentQueryAllResponse queryAll() {
         return departmentQueryAllService.queryAll();
     }
 
@@ -49,6 +49,18 @@ public class DepartmentController {
     @PutMapping("/update/{id}")
     public void update(@PathVariable Long id, @RequestBody DepartmentCreateRequest request) {
         departmentUpdateService.update(id, request);
+    }
+
+    @PostMapping("/query")
+    public DepartmentQueryhanResponse query(@RequestBody DepartmentQueryhanRequest request) {
+        System.out.println(request.getEndDate());
+        System.out.println(request.getStartDate());
+        return departmentHanService.queryAll(request);
+    }
+
+    @GetMapping("/check/{id}")
+    public boolean check(@PathVariable Long id) {
+        return departmentCheckUserService.check(id);
     }
 
     @Operation(summary = "과행사 삭제, 수정 가능 권한 - myWork, master, department")
