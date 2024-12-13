@@ -9,4 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 public class DepartmentQueryhanResponse {
     private List<DepartmentQueryhanList> data;
+    private String startDate;
+    private String endDate;
 }

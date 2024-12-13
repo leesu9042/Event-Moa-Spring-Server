@@ -8,4 +8,6 @@ import java.util.List;
 @AllArgsConstructor
 public class DongQueryhanResponse {
     private List<DongQueryhanList> data;
+    private String startDate;
+    private String endDate;
 }
