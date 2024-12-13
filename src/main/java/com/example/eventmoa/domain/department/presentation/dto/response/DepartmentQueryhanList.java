@@ -33,5 +33,6 @@ public class DepartmentQueryhanList {
         this.place = department.getPlace();
         this.personnel = department.getPersonnel();
         this.department = department.getDepartment().getDepartmentName();
+        this.note = department.getNote();
     }
 }
