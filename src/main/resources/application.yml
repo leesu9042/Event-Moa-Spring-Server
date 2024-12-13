@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/${DB_URL:event_moa}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:0000}
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,5 +19,5 @@ spring:
     jwt-secret:  ${JWT_SECRET}
     header: ${HEADER}
     prefix: ${PREFIX}
-    accessExp: ${ACCESS_EXP}
-    refreshExp: ${REFRESH_EXP}
+    accessExp: ${ACCESS_EXP:3600}
+    refreshExp: ${REFRESH_EXP:2960000}
