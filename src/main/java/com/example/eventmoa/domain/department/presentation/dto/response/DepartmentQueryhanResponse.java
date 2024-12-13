@@ -7,6 +7,8 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class DepartmentQueryAllResponse {
-    private List<DepartmentQueryAllList> data;
+public class DepartmentQueryhanResponse {
+    private List<DepartmentQueryhanList> data;
+    private String startDate;
+    private String endDate;
 }

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DepartmentUpdateService {
     private final DepartmentRepository departmentRepository;
-    private final DepartmentCreateService departmentCreateService;
     private final UserFacade userFacade;
 
     @Transactional

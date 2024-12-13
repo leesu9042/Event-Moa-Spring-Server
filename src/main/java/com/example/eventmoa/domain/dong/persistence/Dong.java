@@ -1,21 +1,23 @@
-package com.example.eventmoa.domain.department.persistence;
+package com.example.eventmoa.domain.dong.persistence;
 
-//import com.example.eventmoa.domain.department.Departments;
 import com.example.eventmoa.domain.department.Departments;
-import com.example.eventmoa.domain.department.presentation.dto.request.DepartmentCreateRequest;
+import com.example.eventmoa.domain.dong.Dongs;
+import com.example.eventmoa.domain.dong.presentation.dto.request.DongCreateRequest;
 import com.example.eventmoa.domain.user.persistence.User;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
 @Builder
-@Table(name = "tbl_department")
-public class Department {
+@Getter
+@Table(name = "tbl_dong")
+public class Dong {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,24 +38,25 @@ public class Department {
     private Long personnel;
 
     @Column(nullable = false)
-    private Departments department;
+    private Dongs dong;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Column(nullable = false)
-    private String note;
+    private String phone;
 
-    public void update(Long id, DepartmentCreateRequest request) {
+    public void update(Long id, DongCreateRequest request) {
         this.id = id;
         this.eventName = request.getEventName();
         this.date = plusZero(request.getDate());
         this.time = request.getTime();
         this.place = request.getPlace();
         this.personnel = request.getPersonnel();
-        this.department = request.getDepartment();
-        this.note = request.getNote();
+        this.dong = request.getDong();
+        this.phone = request.getPhone();
     }
+
     private String plusZero(String date){
         String[] day = date.split("\\.");
         String[] time = day[2].split(" ");
@@ -65,6 +68,5 @@ public class Department {
         }
         return day[0] + "." + day[1] + "." + time[0]+" "+time[1];
     }
-
 
 }

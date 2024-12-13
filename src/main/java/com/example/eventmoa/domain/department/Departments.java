@@ -1,9 +1,11 @@
 package com.example.eventmoa.domain.department;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@Getter
 public enum Departments {
     // 감사실
     AUDIT_OFFICE("감사실","감사실"),
