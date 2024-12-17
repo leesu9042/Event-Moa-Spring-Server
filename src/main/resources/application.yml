@@ -1,24 +1,24 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/event_moa
-    username: root
-    password: 
+    url: jdbc:mysql://localhost:3306/${DB_URL:eventmoa}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:0000}
+
   jpa:
     hibernate:
       ddl-auto: update
-    properties.hibernate:
-
-      format_sql: true
-      show_sql: true
-      jdbc:
-        batch_size: 200
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: ${SHOW_SQL:true}
+        jdbc:
+          batch_size: 200
     open-in-view: false
 
   jwt:
-    jwt-secret: asdfasdfasdfasdfasdf
-    header: Authorization
-    prefix: Bearer
-    accessExp: 3600
-    refreshExp: 2960000
-
+    jwt-secret: ${JWT_SECRET:asdfasdfasdfasdfasdf}  # 오류 수정: JTW -> JWT
+    header: ${HEADER:Authorization}
+    prefix: ${PREFIX:Bearer}
+    accessExp: ${ACCESS_EXP:3600}       # 공백 제거
+    refreshExp: ${REFRESH_EXP:2960000} # 공백 제거
