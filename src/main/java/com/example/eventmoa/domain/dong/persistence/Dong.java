@@ -69,4 +69,15 @@ public class Dong {
         return day[0] + "." + day[1] + "." + time[0]+" "+time[1];
     }
 
+    @Override
+    public String toString() {
+        return "Dong{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", dong='" + dong + '\'' +
+                ", time='" + time + '\'' +
+                ", eventName='" + eventName + '\'' +
+                '}';
+    }
+
 }

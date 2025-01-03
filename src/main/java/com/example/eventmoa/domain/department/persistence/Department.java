@@ -65,6 +65,20 @@ public class Department {
         }
         return day[0] + "." + day[1] + "." + time[0]+" "+time[1];
     }
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", department=" + department +
+                ", eventName='" + eventName + '\'' +
+                ", note='" + note + '\'' +
+                ", personnel=" + personnel +
+                ", place='" + place + '\'' +
+                ", time='" + time + '\'' +
+                ", userId=" + id +
+                '}';
+    }
 
 
 }

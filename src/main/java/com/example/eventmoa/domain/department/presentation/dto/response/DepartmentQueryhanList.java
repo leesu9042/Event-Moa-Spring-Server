@@ -35,4 +35,18 @@ public class DepartmentQueryhanList {
         this.department = department.getDepartment().getDepartmentName();
         this.note = department.getNote();
     }
+
+    @Override
+    public String toString() {
+        return "DepartmentQueryhanList{" +
+                "date='" + date + '\'' +
+                ", department='" + department + '\'' +
+                ", eventName='" + eventName + '\'' +
+                ", note='" + note + '\'' +
+                ", personnel=" + personnel +
+                ", place='" + place + '\'' +
+                ", time='" + time + '\'' +
+
+                '}';
+    }
 }

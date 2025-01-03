@@ -17,9 +17,21 @@ public class DongQueryAllService {
 
     @Transactional(readOnly = true)
     public DongQueryAllResponse queryAll() {
-         return new DongQueryAllResponse(dongRepository.findAllByOrderByDateAscTimeAscDongAsc()
-                .stream()
+        // DB에서 데이터 조회
+        var dongList = dongRepository.findAllByOrderByDateAscTimeAscDongAsc();
+
+        // 조회된 데이터를 출력 (디버깅용)
+        dongList.forEach(d -> System.out.println("DB Data: " + d));
+
+        // DTO 변환 및 반환
+        var responseList = dongList.stream()
                 .map(DongQueryAllList::new)
-                .toList());
+                .toList();
+
+        // 변환된 데이터를 출력 (디버깅용)
+        responseList.forEach(d -> System.out.println("Converted Data: " + d));
+
+        return new DongQueryAllResponse(responseList);
     }
 }
+

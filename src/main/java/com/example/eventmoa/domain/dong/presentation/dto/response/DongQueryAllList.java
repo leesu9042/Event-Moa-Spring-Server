@@ -52,4 +52,17 @@ public class DongQueryAllList {
         this.dong = dong.getDong();
         this.phone = dong.getPhone();
     }
+
+    @Override
+    public String toString() {
+        return "DongQueryAllList{" +
+                "date='" + date + '\'' +
+                ", dong='" + dong + '\'' +
+                ", time='" + time + '\'' +
+                ", eventName='" + eventName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", personnel='" + personnel + '\'' +
+                '}';
+    }
+
 }
